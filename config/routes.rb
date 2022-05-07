@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   root to: 'main#index'
-  resources :discussions, only: %i[index create new edit update]
+  resources :discussions, only: %i[index create new edit update destroy]
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
