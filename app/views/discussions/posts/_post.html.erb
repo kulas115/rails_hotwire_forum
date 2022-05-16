@@ -1,6 +1,8 @@
-<div class="card my-4">
-  <div class="card-body">
-    <%= render partial: "discussions/posts/header", locals: { post: post } %>
-    <%= post.body %>
+<%= turbo_frame_tag dom_id(post) do %>
+  <div class="card my-4">
+    <div class="card-body">
+      <%= render partial: "discussions/posts/header", locals: { post: post } %>
+      <%= post.body %>
+    </div>
   </div>
-</div>
+<% end %>
