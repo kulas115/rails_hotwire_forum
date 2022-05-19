@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_512_065_726) do
+ActiveRecord::Schema[7.0].define(version: 20_220_519_060_621) do
   create_table 'action_text_rich_texts', force: :cascade do |t|
     t.string 'name', null: false
     t.text 'body'
@@ -52,6 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 20_220_512_065_726) do
     t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
+  create_table 'categories', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'discussions_count'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
   create_table 'discussions', force: :cascade do |t|
     t.string 'name'
     t.boolean 'pinned', default: false
@@ -60,6 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_512_065_726) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.integer 'posts_count', default: 0
+    t.integer 'category_id'
     t.index ['user_id'], name: 'index_discussions_on_user_id'
   end
 
