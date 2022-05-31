@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_519_060_621) do
+ActiveRecord::Schema[7.0].define(version: 20_220_531_063_917) do
   create_table 'action_text_rich_texts', force: :cascade do |t|
     t.string 'name', null: false
     t.text 'body'
@@ -59,6 +59,16 @@ ActiveRecord::Schema[7.0].define(version: 20_220_519_060_621) do
     t.datetime 'updated_at', null: false
   end
 
+  create_table 'discussion_subscriptions', force: :cascade do |t|
+    t.integer 'discussion_id', null: false
+    t.integer 'user_id', null: false
+    t.string 'subscription_type'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['discussion_id'], name: 'index_discussion_subscriptions_on_discussion_id'
+    t.index ['user_id'], name: 'index_discussion_subscriptions_on_user_id'
+  end
+
   create_table 'discussions', force: :cascade do |t|
     t.string 'name'
     t.boolean 'pinned', default: false
@@ -97,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 20_220_519_060_621) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'discussion_subscriptions', 'discussions'
+  add_foreign_key 'discussion_subscriptions', 'users'
   add_foreign_key 'discussions', 'users'
   add_foreign_key 'posts', 'discussions'
   add_foreign_key 'posts', 'users'

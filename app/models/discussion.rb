@@ -7,6 +7,7 @@ class Discussion < ApplicationRecord
   delegate :name, prefix: :category, to: :category, allow_nil: true
 
   has_many :posts, dependent: :destroy
+  has_many :discussion_subscriptions, dependent: :destroy
 
   validates :name, presence: true
 
