@@ -14,6 +14,12 @@ Rails.application.routes.draw do
   end
   devise_for :users
 
+  resources :notifications, only: :index do
+    collection do
+      post '/mark_as_read', to: 'notifications#read_all', as: :read
+    end
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
